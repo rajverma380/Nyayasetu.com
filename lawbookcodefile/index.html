@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NyayaSetu - Indian Law and Legal Awareness Portal">
+    <title>NyayaSetu | Indian Law & Legal Awareness</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --navy: #071a35;
+            --navy2: #0d2b52;
+            --gold: #d89b28;
+            --gold-light: #f4c766;
+            --white: #ffffff;
+            --light: #f5f7fa;
+            --text: #172033;
+            --muted: #687386;
+            --border: #e5e9ef;
+            --shadow: 0 12px 35px rgba(7, 26, 53, 0.10);
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7, 26, 53, 0.97);
+            backdrop-filter: blur(15px);
+            color: white;
+            padding: 14px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,.15);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--navy);
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .logo h2 {
+            font-size: 22px;
+            letter-spacing: .5px;
+        }
+
+        .logo span {
+            color: var(--gold-light);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: #e9edf4;
+            transition: .3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+
+        .dark-btn,
+        .menu-btn {
+            border: 1px solid rgba(255,255,255,.2);
+            background: rgba(255,255,255,.08);
+            color: white;
+            border-radius: 9px;
+            padding: 9px 12px;
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 20px;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 620px;
+            background:
+                radial-gradient(circle at 80% 30%, rgba(216,155,40,.18), transparent 30%),
+                linear-gradient(135deg, #06172f, #0c2c55);
+            color: white;
+            padding: 90px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 680px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 15px;
+            border: 1px solid rgba(244,199,102,.4);
+            color: var(--gold-light);
+            border-radius: 50px;
+            background: rgba(244,199,102,.08);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1.08;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: var(--gold-light);
+        }
+
+        .hero p {
+            color: #c9d4e4;
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 21px;
+            border-radius: 9px;
+            border: none;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: var(--gold-light);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,.35);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--navy);
+        }
+
+        .law-visual {
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.15);
+            display: grid;
+            place-items: center;
+            position: relative;
+            background: radial-gradient(circle, rgba(216,155,40,.15), transparent 65%);
+            flex-shrink: 0;
+        }
+
+        .law-visual::before,
+        .law-visual::after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(216,155,40,.25);
+            border-radius: 50%;
+        }
+
+        .law-visual::before {
+            inset: 35px;
+        }
+
+        .law-visual::after {
+            inset: 70px;
+        }
+
+        .scales {
+            font-size: 100px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,.3));
+            z-index: 2;
+        }
+
+        /* SEARCH */
+        .search-wrapper {
+            max-width: 900px;
+            margin: -38px auto 70px;
+            position: relative;
+            z-index: 5;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 17px;
+            font-size: 16px;
+        }
+
+        .search-box button {
+            background: var(--navy);
+            color: white;
+            border: none;
+            padding: 15px 24px;
+            border-radius: 10px;
+        }
+
+        /* GENERAL */
+        section {
+            padding: 70px 6%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 42px;
+        }
+
+        .section-header .mini {
+            color: var(--gold);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .section-header h2 {
+            color: var(--navy);
+            font-size: 36px;
+            margin: 7px 0;
+        }
+
+        .section-header p {
+            color: var(--muted);
+            max-width: 650px;
+            margin: auto;
+        }
+
+        /* CATEGORIES */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .category-card {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 27px;
+            border-radius: 15px;
+            transition: .3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-7px);
+            box-shadow: var(--shadow);
+            border-color: var(--gold-light);
+        }
+
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background: #fff6e3;
+            color: #a96e00;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 24px;
+            margin-bottom: 17px;
+        }
+
+        .category-card h3 {
+            margin-bottom: 6px;
+            color: var(--navy);
+        }
+
+        .category-card p {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        /* ACTS */
+        #acts {
+            background: white;
+        }
+
+        .acts-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .act-card {
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 24px;
+            position: relative;
+            background: #fff;
+            transition: .3s;
+        }
+
+        .act-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .act-year {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: #fff4d8;
+            color: #996300;
+            font-size: 12px;
+            padding: 5px 9px;
+            border-radius: 20px;
+        }
+
+        .act-card .icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .act-card h3 {
+            color: var(--navy);
+            font-size: 18px;
+            padding-right: 45px;
+            margin-bottom: 9px;
+        }
+
+        .act-card p {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        .read-btn {
+            border: none;
+            background: transparent;
+            color: #a56d06;
+            font-weight: 700;
+        }
+
+        /* RIGHTS */
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .right-card {
+            background: white;
+            padding: 28px;
+            border-radius: 15px;
+            border-left: 4px solid var(--gold);
+            box-shadow: 0 5px 20px rgba(0,0,0,.05);
+            transition: .3s;
+        }
+
+        .right-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .number {
+            font-size: 13px;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .right-card h3 {
+            color: var(--navy);
+            margin: 7px 0;
+        }
+
+        .right-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* PROCEDURES */
+        #procedures {
+            background: var(--navy);
+            color: white;
+        }
+
+        #procedures .section-header h2 {
+            color: white;
+        }
+
+        #procedures .section-header p {
+            color: #b9c6d8;
+        }
+
+        .procedure-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .procedure-card {
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.12);
+            padding: 25px;
+            border-radius: 15px;
+            transition: .3s;
+        }
+
+        .procedure-card:hover {
+            background: rgba(255,255,255,.1);
+            transform: translateY(-5px);
+        }
+
+        .procedure-card .emoji {
+            font-size: 30px;
+        }
+
+        .procedure-card h3 {
+            margin: 12px 0 6px;
+        }
+
+        .procedure-card p {
+            color: #b8c5d7;
+            font-size: 14px;
+        }
+
+        /* AWARENESS */
+        .awareness-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            transition: .3s;
+        }
+
+        .info-card:hover {
+            box-shadow: var(--shadow);
+        }
+
+        .info-card h3 {
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* STUDENT */
+        .student-box {
+            background: linear-gradient(135deg, #fdf3db, #fff);
+            border: 1px solid #efdcae;
+            border-radius: 20px;
+            padding: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .student-box h2 {
+            color: var(--navy);
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .student-box p {
+            color: var(--muted);
+        }
+
+        .student-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .student-feature {
+            background: white;
+            padding: 9px 13px;
+            border-radius: 8px;
+            font-size: 13px;
+            border: 1px solid #eadfbf;
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 18px 20px;
+            border: none;
+            background: white;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 20px 18px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #041126;
+            color: #c4cfdd;
+            padding: 55px 6% 25px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 35px;
+        }
+
+        footer h3 {
+            color: white;
+            margin-bottom: 13px;
+        }
+
+        footer p,
+        footer li {
+            font-size: 14px;
+            color: #9caabd;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: 8px;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #78869a;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0,0,0,.65);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 650px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 18px;
+            padding: 30px;
+            position: relative;
+            animation: pop .25s ease;
+        }
+
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: scale(.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            border: none;
+            background: transparent;
+            color: #555;
+        }
+
+        .modal-content h2 {
+            color: var(--navy);
+            margin-bottom: 15px;
+            padding-right: 30px;
+        }
+
+        .modal-content p {
+            color: var(--muted);
+            margin-bottom: 15px;
+        }
+
+        /* DARK MODE */
+        body.dark {
+            --light: #0b1424;
+            --white: #111d31;
+            --text: #e8edf5;
+            --muted: #a8b4c5;
+            --border: #24334a;
+            --navy: #e9edf4;
+            background: #0b1424;
+        }
+
+        body.dark .section-header h2,
+        body.dark .category-card h3,
+        body.dark .act-card h3,
+        body.dark .right-card h3,
+        body.dark .info-card h3,
+        body.dark .student-box h2 {
+            color: #eef3f9;
+        }
+
+        body.dark .search-box,
+        body.dark .category-card,
+        body.dark .act-card,
+        body.dark .right-card,
+        body.dark .info-card,
+        body.dark .faq-item,
+        body.dark .faq-question,
+        body.dark .modal-content {
+            background: #111d31;
+            border-color: #24334a;
+        }
+
+        body.dark .student-box {
+            background: #17243a;
+            border-color: #30415b;
+        }
+
+        body.dark .faq-question {
+            color: #eef3f9;
+        }
+
+        /* TOP BUTTON */
+        #topBtn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: var(--gold);
+            color: var(--navy);
+            font-size: 18px;
+            display: none;
+            z-index: 500;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1000px) {
+            .category-grid,
+            .acts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .rights-grid,
+            .procedure-grid,
+            .awareness-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .law-visual {
+                width: 270px;
+                height: 270px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--navy);
+                padding: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 60px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .law-visual {
+                width: 230px;
+                height: 230px;
+            }
+
+            .scales {
+                font-size: 70px;
+            }
+
+            .category-grid,
+            .acts-grid,
+            .rights-grid,
+            .procedure-grid,
+            .awareness-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .student-box {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 55px 5%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .logo h2 {
+                font-size: 18px;
+            }
+
+            .dark-btn {
+                display: none;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .search-box input,
+            .search-box button {
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="#home" class="logo">
+            <div class="logo-icon">⚖</div>
+            <h2>Nyaya<span>Setu</span></h2>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#categories">Indian Laws</a></li>
+            <li><a href="#rights">Fundamental Rights</a></li>
+            <li><a href="#procedures">Procedures</a></li>
+            <li><a href="#acts">Important Acts</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+
+        <div>
+            <button class="dark-btn" id="darkMode">🌙</button>
+            <button class="menu-btn" id="menuBtn">☰</button>
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="badge">🇮🇳 INDIAN LEGAL AWARENESS PORTAL</span>
+
+            <h1>
+                Know Your <span>Rights.</span><br>
+                Understand Indian Law.
+            </h1>
+
+            <p>
+                Explore Indian laws, fundamental rights, important Acts
+                and legal procedures explained in simple and easy language.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#acts" class="btn btn-primary">Explore Laws →</a>
+                <a href="#rights" class="btn btn-outline">Know Your Rights</a>
+            </div>
+        </div>
+
+        <div class="law-visual">
+            <div class="scales">⚖️</div>
+        </div>
+    </section>
+
+
+    <!-- SEARCH -->
+    <div class="search-wrapper">
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search laws, Acts, sections or legal topics..."
+            >
+            <button onclick="searchLaws()">🔍 Search</button>
+        </div>
+    </div>
+
+
+    <!-- CATEGORIES -->
+    <section id="categories">
+        <div class="section-header">
+            <div class="mini">Explore</div>
+            <h2>Indian Law Categories</h2>
+            <p>
+                Understand different areas of Indian law through simple
+                explanations and useful legal information.
+            </p>
+        </div>
+
+        <div class="category-grid">
+
+            <div class="category-card">
+                <div class="category-icon">🏛️</div>
+                <h3>Constitutional Law</h3>
+                <p>Learn about the Constitution, rights, duties and powers of government.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">⚖️</div>
+                <h3>Criminal Law</h3>
+                <p>Understand offences, criminal procedures, FIRs, bail and related concepts.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">📜</div>
+                <h3>Civil Law</h3>
+                <p>Explore disputes involving property, contracts, compensation and more.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">💻</div>
+                <h3>Cyber Law</h3>
+                <p>Learn about online crimes, digital evidence, privacy and cyber safety.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🛒</div>
+                <h3>Consumer Law</h3>
+                <p>Know your rights as a consumer and understand complaint procedures.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">👨‍👩‍👧</div>
+                <h3>Family Law</h3>
+                <p>Basic information about marriage, divorce, maintenance and family matters.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🏠</div>
+                <h3>Property Law</h3>
+                <p>Understand basic concepts related to ownership, transfer and property disputes.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">💼</div>
+                <h3>Labour Law</h3>
+                <p>Learn about workplace rights, wages, employment and worker protections.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- IMPORTANT ACTS -->
+    <section id="acts">
+        <div class="section-header">
+            <div class="mini">Legal Library</div>
+            <h2>Important Indian Acts</h2>
+            <p>
+                A quick introduction to some important laws and legal frameworks
+                in India.
+            </p>
+        </div>
+
+        <div class="acts-grid" id="actsGrid">
+
+            <div class="act-card" data-name="constitution india constitutional law">
+                <span class="act-year">1950</span>
+                <div class="icon">🇮🇳</div>
+                <h3>Constitution of India</h3>
+                <p>The supreme legal framework establishing India's government, rights and duties.</p>
+                <button class="read-btn" onclick="openModal('Constitution of India', 'The Constitution of India establishes the framework of government and defines fundamental rights, directive principles and constitutional institutions.')">
+                    Read More →
+                </button>
+            </div>
+
+            <div class="act-card" data-name="bharatiya nyaya sanhita bns criminal law">
+                <span class="act-year">2023</span>
+                <div class="icon">⚖️</div>
+                <h3>Bharatiya Nyaya Sanhita</h3>
+                <p>The principal legislation dealing with offences and punishments in India.</p>
+                <button class="read-btn" onclick="openModal('Bharatiya Nyaya Sanhita (BNS)', 'The Bharatiya Nyaya Sanhita, 2023 replaced the Indian Penal Code as the primary substantive criminal law framework.')">
+                    Read More →
+                </button>
+            </div>
+
+            <div class="act-card" data-name="bharatiya nagarik suraksha sanhita bnss criminal procedure">
+                <span class="act-year">2023</span>
+                <div class="icon">👮</div>
+                <h3>Bharatiya Nagarik Suraksha Sanhita</h3>
+                <p>Provides the framework for criminal procedure and investigation in India.</p>
+                <button class="read-btn" onclick="openModal('Bharatiya Nagarik Suraksha Sanhita (BNSS)', 'The BNSS provides the procedural framework for criminal investigations, proceedings and related matters.')">
+                    Read More →
+                </button>
+            </div>
+
+            <div class="act-card" data-name="bharatiya sakshya adhiniyam bsa evidence">
+                <span class="act-year">2023</span>
+                <div class="icon">📚</div>
+                <h3>Bharatiya Sakshya Adhiniyam</h3>
+                <p>Deals with principles relating to evidence in legal proceedings.</p>
+                <button class="read-btn" onclick="openModal('Bharatiya Sakshya Adhiniyam (BSA)', 'The BSA provides rules and principles relating to evidence used in judicial proceedings.')">
+                    Read More →
+                </button>
+            </div>
+
+            <div class="act-card" data-name="information technology act cyber law it">
+                <span class="act-year">2000</span>
+                <div class="icon">💻</div>
+                <h3>Information Technology Act</h3>
+                <p>Provides legal recognition to electronic records and addresses various cyber offences.</p>
+                <button class="read-btn" onclick="openModal('Information Technology Act, 2000', 'The Information Technology Act provides a legal framework for electronic records, electronic commerce and specified cyber offences.')">
+                    Read More →
+                </button>
+            </div>
+
+            <div class="act-card" data-name="consumer protection act consumer">
+                <span class="act-year">2019</span>
+                <div class="icon">🛍️</div>
+                <h3>Consumer Protection Act</h3>
+                <p>Protects consumer interests and provides mechanisms for resolving consumer disputes.</p>
+                <button class="read-btn" onclick="openModal('Consumer Protection Act, 2019', 'The Act strengthens consumer protection and provides mechanisms for addressing consumer grievances and disputes.')">
+                    Read More →
+                </button>
+            </div>
+
+            <div class="act-card" data-name="right to information act rti">
+                <span class="act-year">2005</span>
+                <div class="icon">🔎</div>
+                <h3>Right to Information Act</h3>
+                <p>Provides citizens a mechanism to seek information from public authorities, subject to legal exceptions.</p>
+                <button class="read-btn" onclick="openModal('Right to Information Act, 2005', 'The RTI framework enables eligible applicants to seek information from public authorities, subject to exemptions provided by law.')">
+                    Read More →
+                </button>
+            </div>
+
+            <div class="act-card" data-name="motor vehicles act traffic transport">
+                <span class="act-year">1988</span>
+                <div class="icon">🚗</div>
+                <h3>Motor Vehicles Act</h3>
+                <p>Regulates various aspects of motor vehicles, driving licences and road transport.</p>
+                <button class="read-btn" onclick="openModal('Motor Vehicles Act, 1988', 'The Motor Vehicles Act provides the legal framework for motor vehicles, licensing and several aspects of road transport.')">
+                    Read More →
+                </button>
+            </div>
+
+        </div>
+
+        <p id="noResults" style="display:none;text-align:center;margin-top:30px;color:#777;">
+            No matching law found.
+        </p>
+    </section>
+
+
+    <!-- FUNDAMENTAL RIGHTS -->
+    <section id="rights">
+        <div class="section-header">
+            <div class="mini">Constitution</div>
+            <h2>Fundamental Rights</h2>
+            <p>
+                Fundamental Rights are constitutionally protected rights
+                provided to individuals under Part III of the Constitution.
+            </p>
+        </div>
+
+        <div class="rights-grid">
+
+            <div class="right-card">
+                <div class="number">ARTICLE 14–18</div>
+                <h3>Right to Equality</h3>
+                <p>Provides constitutional guarantees concerning equality before law and equal protection of laws.</p>
+            </div>
+
+            <div class="right-card">
+                <div class="number">ARTICLE 19–22</div>
+                <h3>Right to Freedom</h3>
+                <p>Includes important freedoms and protections subject to constitutional limitations.</p>
+            </div>
+
+            <div class="right-card">
+                <div class="number">ARTICLE 23–24</div>
+                <h3>Right Against Exploitation</h3>
+                <p>Protects against trafficking, forced labour and certain forms of child labour.</p>
+            </div>
+
+            <div class="right-card">
+                <div class="number">ARTICLE 25–28</div>
+                <h3>Freedom of Religion</h3>
+                <p>Provides constitutional protection concerning freedom of conscience and religion.</p>
+            </div>
+
+            <div class="right-card">
+                <div class="number">ARTICLE 29–30</div>
+                <h3>Cultural & Educational Rights</h3>
+                <p>Protects certain cultural and educational interests, particularly of minorities.</p>
+            </div>
+
+            <div class="right-card">
+                <div class="number">ARTICLE 32</div>
+                <h3>Constitutional Remedies</h3>
+                <p>Provides a constitutional mechanism for seeking enforcement of Fundamental Rights.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- PROCEDURES -->
+    <section id="procedures">
+        <div class="section-header">
+            <div class="mini" style="color:#f4c766;">Awareness</div>
+            <h2>Legal Procedures</h2>
+            <p>
+                Basic educational guides to help users understand common legal processes.
+            </p>
+        </div>
+
+        <div class="procedure-grid">
+
+            <div class="procedure-card">
+                <div class="emoji">🚔</div>
+                <h3>Filing an FIR</h3>
+                <p>Understand the basic concept of a First Information Report and the process of reporting a cognizable offence.</p>
+            </div>
+
+            <div class="procedure-card">
+                <div class="emoji">📄</div>
+                <h3>Filing an RTI</h3>
+                <p>Learn the basic steps involved in requesting information under the Right to Information framework.</p>
+            </div>
+
+            <div class="procedure-card">
+                <div class="emoji">⚖️</div>
+                <h3>Bail Basics</h3>
+                <p>Understand the general concept of bail and how courts consider bail applications.</p>
+            </div>
+
+            <div class="procedure-card">
+                <div class="emoji">💻</div>
+                <h3>Cybercrime Complaint</h3>
+                <p>Learn about reporting online fraud and other cyber-related incidents through official channels.</p>
+            </div>
+
+            <div class="procedure-card">
+                <div class="emoji">🛒</div>
+                <h3>Consumer Complaint</h3>
+                <p>Understand the basic process of raising a consumer grievance before the appropriate forum.</p>
+            </div>
+
+            <div class="procedure-card">
+                <div class="emoji">✉️</div>
+                <h3>Legal Notice</h3>
+                <p>Learn what a legal notice generally means and why it may be used before legal proceedings.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- LEGAL AWARENESS -->
+    <section>
+        <div class="section-header">
+            <div class="mini">Know Better</div>
+            <h2>Legal Awareness</h2>
+            <p>Common legal terms explained in simple language.</p>
+        </div>
+
+        <div class="awareness-grid">
+
+            <div class="info-card">
+                <h3>What is an FIR?</h3>
+                <p>An FIR is a formal record made by police regarding information relating to a cognizable offence.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>What is Bail?</h3>
+                <p>Bail generally refers to release from custody subject to conditions imposed under applicable law.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>What is an Affidavit?</h3>
+                <p>An affidavit is a written statement of facts confirmed by the person making it under oath or affirmation.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>What is RTI?</h3>
+                <p>RTI refers to the legal framework allowing citizens to seek information from public authorities, subject to exemptions.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>What is a Legal Notice?</h3>
+                <p>A legal notice is a formal communication that may inform another party about a claim or intended legal action.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>What is a Complaint?</h3>
+                <p>A complaint is a formal expression of a grievance or allegation made before an appropriate authority.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- STUDENT ZONE -->
+    <section id="about">
+        <div class="student-box">
+
+            <div>
+                <div class="mini" style="color:#a56d06;font-weight:bold;">For Students</div>
+                <h2>Law Made Easy</h2>
+                <p>
+                    A dedicated learning section for students interested in
+                    the Indian Constitution, law and legal awareness.
+                </p>
+
+                <div class="student-features">
+                    <span class="student-feature">📚 Legal Terms</span>
+                    <span class="student-feature">🇮🇳 Constitution Basics</span>
+                    <span class="student-feature">🧠 Legal Quiz</span>
+                    <span class="student-feature">📑 Important Sections</span>
+                    <span class="student-feature">🔍 Case Studies</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="startQuiz()">
+                Take Legal Quiz →
+            </button>
+
+        </div>
+    </section>
+
+
+    <!-- FAQ -->
+    <section>
+        <div class="section-header">
+            <div class="mini">FAQ</div>
+            <h2>Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq">
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Is NyayaSetu a legal advice website?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    No. NyayaSetu is an educational and legal-awareness project. It does not provide personalised legal advice.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    What is the Constitution of India?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    The Constitution is the supreme legal framework of India. It establishes institutions of government and contains Fundamental Rights and other constitutional provisions.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    What are Fundamental Rights?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    Fundamental Rights are constitutionally protected rights contained in Part III of the Constitution of India.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Can I use this website for a real legal case?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    The website is intended for general educational information. For a specific legal matter, consult a qualified legal professional.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+
+            <div>
+                <h3>⚖ NyayaSetu</h3>
+                <p>
+                    An Indian Law & Legal Awareness Portal designed to make
+                    basic legal information easier to understand.
+                </p>
+            </div>
+
+            <div>
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#acts">Important Acts</a></li>
+                    <li><a href="#rights">Fundamental Rights</a></li>
+                    <li><a href="#procedures">Legal Procedures</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Project</h3>
+                <ul>
+                    <li>Indian Law Awareness</li>
+                    <li>BCA Project</li>
+                    <li>Educational Portal</li>
+                    <li>Legal Information</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 NyayaSetu. Educational Project.
+            <br>
+            This website does not constitute legal advice.
+        </div>
+    </footer>
+
+
+    <!-- MODAL -->
+    <div class="modal" id="lawModal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal()">×</button>
+            <h2 id="modalTitle"></h2>
+            <p id="modalText"></p>
+
+            <div style="background:#fff7e5;padding:15px;border-radius:10px;margin-top:15px;">
+                <strong>Educational Note:</strong>
+                <p style="margin:5px 0 0;">
+                    Laws can change through amendments and judicial interpretation.
+                    Always verify the current law and seek professional legal advice
+                    for specific matters.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- TOP BUTTON -->
+    <button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        ↑
+    </button>
+
+
+    <script>
+        // MOBILE MENU
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        menuBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("show");
+        });
+
+        document.querySelectorAll(".nav-links a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("show");
+            });
+        });
+
+
+        // DARK MODE
+        const darkMode = document.getElementById("darkMode");
+
+        darkMode.addEventListener("click", () => {
+            document.body.classList.toggle("dark");
+
+            if (document.body.classList.contains("dark")) {
+                darkMode.textContent = "☀️";
+                localStorage.setItem("nyayaTheme", "dark");
+            } else {
+                darkMode.textContent = "🌙";
+                localStorage.setItem("nyayaTheme", "light");
+            }
+        });
+
+        if (localStorage.getItem("nyayaTheme") === "dark") {
+            document.body.classList.add("dark");
+            darkMode.textContent = "☀️";
+        }
+
+
+        // SEARCH
+        const searchInput = document.getElementById("searchInput");
+        const noResults = document.getElementById("noResults");
+
+        searchInput.addEventListener("input", searchLaws);
+
+        function searchLaws() {
+            const query = searchInput.value.toLowerCase().trim();
+            const cards = document.querySelectorAll(".act-card");
+            let found = 0;
+
+            cards.forEach(card => {
+                const text = card.dataset.name.toLowerCase();
+
+                if (text.includes(query)) {
+                    card.style.display = "block";
+                    found++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            noResults.style.display = found === 0 ? "block" : "none";
+        }
+
+
+        // MODAL
+        const modal = document.getElementById("lawModal");
+
+        function openModal(title, text) {
+            document.getElementById("modalTitle").textContent = title;
+            document.getElementById("modalText").textContent = text;
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        window.addEventListener("click", event => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+
+        // FAQ
+        document.querySelectorAll(".faq-question").forEach(question => {
+            question.addEventListener("click", () => {
+                const item = question.parentElement;
+                const symbol = question.querySelector("span");
+
+                document.querySelectorAll(".faq-item").forEach(other => {
+                    if (other !== item) {
+                        other.classList.remove("active");
+                        other.querySelector("span").textContent = "+";
+                    }
+                });
+
+                item.classList.toggle("active");
+                symbol.textContent = item.classList.contains("active") ? "−" : "+";
+            });
+        });
+
+
+        // QUIZ
+        function startQuiz() {
+
+            const questions = [
+                {
+                    question: "Which document is the supreme legal framework of India?",
+                    options: ["IPC", "Constitution of India", "RTI Act", "Motor Vehicles Act"],
+                    answer: 1
+                },
+                {
+                    question: "Fundamental Rights are mainly contained in which Part of the Constitution?",
+                    options: ["Part I", "Part II", "Part III", "Part IV"],
+                    answer: 2
+                },
+                {
+                    question: "RTI stands for:",
+                    options: [
+                        "Right to Indian Information",
+                        "Right to Information",
+                        "Right to Internal Information",
+                        "Rule to Information"
+                    ],
+                    answer: 1
+                }
+            ];
+
+            let score = 0;
+
+            for (let i = 0; i < questions.length; i++) {
+
+                const q = questions[i];
+
+                const answer = prompt(
+                    q.question +
+                    "\n\n" +
+                    q.options.map((option, index) =>
+                        `${index + 1}. ${option}`
+                    ).join("\n")
+                );
+
+                const selected = parseInt(answer) - 1;
+
+                if (selected === q.answer) {
+                    score++;
+                }
+            }
+
+            alert(
+                `Quiz Completed!\n\nYour Score: ${score}/${questions.length}`
+            );
+        }
+
+
+        // BACK TO TOP
+        const topBtn = document.getElementById("topBtn");
+
+        window.addEventListener("scroll", () => {
+            topBtn.style.display = window.scrollY > 500 ? "block" : "none";
+        });
+
+
+        // ESCAPE MODAL
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
